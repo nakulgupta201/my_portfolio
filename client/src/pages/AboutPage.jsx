@@ -1,0 +1,97 @@
+import React from 'react';
+import { portfolioData } from '../data/portfolioData';
+
+const AboutPage = () => {
+  const { personal, interests } = portfolioData;
+
+  const scrollToContact = () => {
+    const el = document.getElementById('contact');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <div className="container" style={{ paddingTop: '6.5rem', paddingBottom: '5rem' }}>
+      <header className="section-header">
+        <span className="section-badge">Background &amp; Bio</span>
+        <h1 className="section-title">About Me</h1>
+        <p className="section-subtitle">
+          Get to know my academic background, technical interests, and journey as a computer science student.
+        </p>
+      </header>
+
+      <div className="about-grid">
+        <aside className="about-profile-card">
+          <div className="avatar-wrapper">
+            <div className="avatar-inner">
+              <span>NG</span>
+            </div>
+            <div className="avatar-badge" title="Active Student" />
+          </div>
+
+          <h2 className="profile-name">{personal.name}</h2>
+          <span className="profile-role">{personal.designation}</span>
+
+          <div className="profile-meta-list">
+            <div className="profile-meta-item">
+              <span className="profile-meta-icon">🏛️</span>
+              <span>{personal.university}</span>
+            </div>
+            <div className="profile-meta-item">
+              <span className="profile-meta-icon">🎓</span>
+              <span>Class of {personal.graduationYear}</span>
+            </div>
+            <div className="profile-meta-item">
+              <span className="profile-meta-icon">📍</span>
+              <span>{personal.location}</span>
+            </div>
+            <div className="profile-meta-item">
+              <span className="profile-meta-icon">💼</span>
+              <span>{personal.status}</span>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            onClick={scrollToContact}
+            className="btn btn-primary btn-sm"
+            style={{ width: '100%', marginTop: '0.5rem' }}
+          >
+            Get In Touch →
+          </button>
+        </aside>
+
+        <div className="about-bio-content">
+          <div className="about-bio-text">
+            {personal.fullBio.map((paragraph, index) => (
+              <p key={index}>{paragraph}</p>
+            ))}
+          </div>
+
+          <div className="quick-facts-grid">
+            {personal.quickFacts.map((fact, index) => (
+              <div key={index} className="fact-card">
+                <div className="fact-label">{fact.label}</div>
+                <div className="fact-value">{fact.value}</div>
+              </div>
+            ))}
+          </div>
+
+          <div className="about-interests-box">
+            <h3 className="about-interests-title">
+              <span>⚡</span> Areas of Interest &amp; Current Study
+            </h3>
+            <div className="interests-pill-grid">
+              {interests.map((interest, index) => (
+                <span key={index} className="interest-pill">
+                  {interest}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutPage;
